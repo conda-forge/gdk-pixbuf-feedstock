@@ -27,13 +27,13 @@ requirements:
     - automake
     - libtool
     - pkg-config
+    - perl
     - glib >=2.51
     - gobject-introspection
     - libffi
     - libtiff
     - libpng
     - jpeg
-    - perl
     - gettext  # [osx]
   run:
     - libgcc  # [linux]
