@@ -27,7 +27,7 @@ requirements:
     - automake
     - libtool
     - pkg-config
-    - perl
+    - perl 5.26
     - glib >=2.51
     - gobject-introspection
     - libffi
