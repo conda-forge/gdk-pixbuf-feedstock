@@ -20,15 +20,16 @@ build:
 
 requirements:
   build:
-    - toolchain
-    - python <3
-    - m4
     - autoconf
     - automake
     - libtool
     - pkg-config
     - perl
-    - glib >=2.51
+    - {{ compiler('c') }}
+  host:
+    - python
+    - m4
+    - glib
     - gobject-introspection
     - libffi
     - libtiff
@@ -36,8 +37,7 @@ requirements:
     - jpeg
     - gettext  # [osx]
   run:
-    - libgcc  # [linux]
-    - glib >=2.51
+    - glib
     - gobject-introspection
     - libffi
     - libtiff
@@ -52,7 +52,7 @@ test:
     - gdk-pixbuf-pixdata --help
 
 about:
-  home: https://developer.gnome.org/gdk-pixbuf/ 
+  home: https://developer.gnome.org/gdk-pixbuf/
   license: GPL-2.0
   license_family: GPL
   license_file: COPYING
