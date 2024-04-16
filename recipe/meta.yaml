@@ -38,7 +38,7 @@ requirements:
     - zlib      # [build_platform != target_platform]
   host:
     - glib
-    - linintl-devel  # [not linux]
+    - libintl-devel  # [not linux]
     - libjpeg-turbo
     - libtiff
     - libpng
