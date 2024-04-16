@@ -31,6 +31,7 @@ requirements:
     - meson
     - ninja
     - gobject-introspection
+    - gettext-tools
     - glib      # [build_platform != target_platform]
     - libjpeg-turbo       # [build_platform != target_platform]
     - libtiff   # [build_platform != target_platform]
