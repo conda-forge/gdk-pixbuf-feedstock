@@ -1,7 +1,7 @@
 {% set lib = "gdk_pixbuf-2.0" %}
 {% set pc = "gdk-pixbuf-2.0" %}
 {% set name = "gdk-pixbuf" %}
-{% set version = "2.42.10" %}
+{% set version = "2.42.11" %}
 
 package:
   name: {{ name|lower }}
@@ -9,10 +9,10 @@ package:
 
 source:
   url: http://ftp.gnome.org/pub/gnome/sources/{{ name }}/{{ '.'.join(version.split('.')[:2]) }}/{{ name }}-{{ version }}.tar.xz
-  sha256: ee9b6c75d13ba096907a2e3c6b27b61bcd17f5c7ebeab5a5b439d2f2e39fe44b
+  sha256: 49dcb402388708647e8c321d56b6fb30f21e51e515d0c5a942268d23052a2f00
 
 build:
-  number: 6
+  number: 0
   ignore_run_exports_from:
     # while zlib isn't linked to at build time. it does appear
     # in the pkgconfig file. Without this build system
@@ -28,6 +28,7 @@ requirements:
   build:
     - pkg-config
     - {{ compiler('c') }}
+    - {{ stdlib("c") }}
     - meson
     - ninja
     - gobject-introspection
