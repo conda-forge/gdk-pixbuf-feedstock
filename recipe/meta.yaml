@@ -31,7 +31,6 @@ requirements:
     - {{ stdlib("c") }}
     - meson
     - ninja
-    - gobject-introspection
     - gettext-tools
     - glib      # [build_platform != target_platform]
     - libjpeg-turbo       # [build_platform != target_platform]
@@ -40,6 +39,7 @@ requirements:
     - zlib      # [build_platform != target_platform]
   host:
     - glib
+    - gobject-introspection
     - libintl-devel  # [not linux]
     - libjpeg-turbo
     - libtiff
