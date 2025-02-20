@@ -6,6 +6,8 @@ channel_sources:
 - conda-forge
 channel_targets:
 - conda-forge main
+gdk_pixbuf:
+- '2'
 glib:
 - '2'
 libjpeg_turbo:
@@ -13,8 +15,8 @@ libjpeg_turbo:
 libpng:
 - '1.6'
 libtiff:
-- '4.6'
+- '4.7'
 target_platform:
 - win-64
 zlib:
-- '1.2'
+- '1'

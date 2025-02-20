@@ -56,7 +56,6 @@ if [[ "$CONDA_BUILD_CROSS_COMPILATION" == "1" ]]; then
 
     meson setup native-build \
         "${meson_config_args[@]}" \
-        --buildtype=release \
         --prefix=$BUILD_PREFIX \
         -Dlibdir=lib \
         --wrap-mode=nofallback
@@ -74,7 +73,6 @@ fi
 meson setup builddir \
     ${MESON_ARGS} \
     "${meson_config_args[@]}" \
-    --buildtype=release \
     --prefix=$PREFIX \
     -Dlibdir=lib \
     --wrap-mode=nofallback
