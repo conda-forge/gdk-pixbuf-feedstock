@@ -11,6 +11,7 @@ meson_config_args=(
     -Dintrospection=enabled
     -Dgtk_doc=false
     -Dman=false
+    -Dothers=enabled
 )
 
 if [[ "$target_platform" = osx-* ]] ; then
@@ -74,7 +75,6 @@ fi
 meson setup builddir \
     ${MESON_ARGS} \
     "${meson_config_args[@]}" \
-    --buildtype=release \
     --prefix=$PREFIX \
     -Dlibdir=lib \
     --wrap-mode=nofallback
