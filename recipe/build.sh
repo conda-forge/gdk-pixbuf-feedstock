@@ -11,6 +11,7 @@ meson_config_args=(
     -Dintrospection=enabled
     -Dgtk_doc=false
     -Dman=false
+    -Dothers=enabled
 )
 
 if [[ "$target_platform" = osx-* ]] ; then

@@ -17,6 +17,7 @@ set ^"MESON_OPTIONS=^
   -D man=false ^
   -D introspection=enabled ^
   -D relocatable=true ^
+  -D others=enabled ^
  ^"
 
 :: configure build using meson
