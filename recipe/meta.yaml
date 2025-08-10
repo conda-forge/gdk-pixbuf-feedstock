@@ -12,7 +12,7 @@ source:
   sha256: b9505b3445b9a7e48ced34760c3bcb73e966df3ac94c95a148cb669ab748e3c7
 
 build:
-  number: 1
+  number: 2
   ignore_run_exports_from:
     # while zlib isn't linked to at build time. it does appear
     # in the pkgconfig file. Without this build system
@@ -36,6 +36,9 @@ requirements:
     - glib      # [build_platform != target_platform]
     - libjpeg-turbo       # [build_platform != target_platform]
     - libtiff   # [build_platform != target_platform]
+    # This is workaround for "pkgconf libtiff-4" failure.
+    # See also: https://github.com/conda-forge/libtiff-feedstock/issues/113
+    - liblzma-devel   # [build_platform != target_platform]
     - libpng    # [build_platform != target_platform]
     - zlib      # [build_platform != target_platform]
   host:
@@ -43,6 +46,9 @@ requirements:
     - libintl-devel  # [not linux]
     - libjpeg-turbo
     - libtiff
+    # This is workaround for "pkgconf libtiff-4" failure.
+    # See also: https://github.com/conda-forge/libtiff-feedstock/issues/113
+    - liblzma-devel
     - libpng
     - zlib
 
