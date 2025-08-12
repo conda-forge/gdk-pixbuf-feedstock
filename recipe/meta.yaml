@@ -12,7 +12,7 @@ source:
   sha256: b9505b3445b9a7e48ced34760c3bcb73e966df3ac94c95a148cb669ab748e3c7
 
 build:
-  number: 2
+  number: 3
   ignore_run_exports_from:
     # while zlib isn't linked to at build time. it does appear
     # in the pkgconfig file. Without this build system
