@@ -4,9 +4,9 @@ set -xeo pipefail
 
 meson_config_args=(
     --backend=ninja
-    -Dgtk_doc=false
     -Ddocumentation=false
     -Dman=false
+    -Dglycin=disabled
     -Dgio_sniffing=false
     -Dinstalled_tests=false
     -Drelocatable=true
