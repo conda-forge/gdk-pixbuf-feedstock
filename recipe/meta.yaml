@@ -1,7 +1,7 @@
 {% set lib = "gdk_pixbuf-2.0" %}
 {% set pc = "gdk-pixbuf-2.0" %}
 {% set name = "gdk-pixbuf" %}
-{% set version = "2.44.4" %}
+{% set version = "2.44.5" %}
 
 package:
   name: {{ name|lower }}
@@ -9,7 +9,7 @@ package:
 
 source:
   url: http://ftp.gnome.org/pub/gnome/sources/{{ name }}/{{ '.'.join(version.split('.')[:2]) }}/{{ name }}-{{ version }}.tar.xz
-  sha256: 93a1aac3f1427ae73457397582a2c38d049638a801788ccbd5f48ca607bdbd17
+  sha256: 69b93e09139b80c0ee661503d60deb5a5874a31772b5184b9cd5462a4100ab68
 
 build:
   number: 0
