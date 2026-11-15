@@ -1,0 +1,101 @@
+schema_version: 1
+
+context:
+  name: gdk-pixbuf
+  version: 2.44.8
+  maj_min: ${{ (version | split('.'))[:2] | join('.') }}
+
+package:
+  name: ${{ name }}
+  version: ${{ version }}
+
+source:
+  url: http://ftp.gnome.org/pub/gnome/sources/${{ name }}/${{ maj_min }}/${{ name }}-${{ version }}.tar.xz
+  sha256: 919f529512961a12e81cd4b4b466a48c3933469e7f9a310c6513cd4fb252ba3c
+
+build:
+  number: 3
+
+requirements:
+  build:
+    - pkgconf
+    - ${{ compiler('c') }}
+    - ${{ stdlib('c') }}
+    - meson
+    - ninja
+    - gobject-introspection
+    - gettext-tools
+    - if: build_platform != target_platform
+      then:
+        - glib
+        - libjpeg-turbo
+        - libtiff
+        - libpng
+        - zlib
+  host:
+    - glib
+    - if: not linux
+      then:
+        - libintl-devel
+    - libjpeg-turbo
+    - libtiff
+    # This is workaround for "pkgconf libtiff-4" failure.
+    # See also: https://github.com/conda-forge/libtiff-feedstock/issues/113
+    - liblzma-devel
+    - libpng
+    - zlib
+  run_exports:
+    # https://abi-laboratory.pro/?view=timeline&l=gdk-pixbuf
+    - ${{ pin_subpackage('gdk-pixbuf', upper_bound='x') }}
+  ignore_run_exports:
+    from_package:
+      # while zlib isn't linked to at build time. it does appear
+      # in the pkgconfig file. Without this build system
+      # tries to include zlib from the build environment
+      # instead of the host environment
+      # https://github.com/conda-forge/gdk-pixbuf-feedstock/pull/40
+      - zlib
+
+tests:
+  - script:
+      - gdk-pixbuf-csource --version
+      - gdk-pixbuf-query-loaders
+      - gdk-pixbuf-pixdata --help
+      # verify that libs can be located through pkg-config
+      - if: unix
+        then:
+          - test -f `pkg-config --variable=libdir --dont-define-prefix gdk-pixbuf-2.0`/libgdk_pixbuf-2.0${SHLIB_EXT}
+          - test -f $PREFIX/lib/girepository-1.0/GdkPixbuf-2.0.typelib
+        else:
+          - for /f "usebackq tokens=*" %%a in (`pkg-config --variable=exec_prefix --dont-define-prefix gdk-pixbuf-2.0`) do if not exist "%%a/bin/gdk_pixbuf-2.0-0.dll" exit 1
+          - for /f "usebackq tokens=*" %%a in (`pkg-config --variable=libdir --dont-define-prefix gdk-pixbuf-2.0`) do if not exist "%%a/gdk_pixbuf-2.0.lib" exit 1
+          - if not exist %PREFIX%\Library\lib\girepository-1.0\GdkPixbuf-2.0.typelib exit 1
+    requirements:
+      run:
+        - pkg-config
+  - package_contents:
+      bin:
+        - gdk-pixbuf-csource
+        - gdk-pixbuf-query-loaders
+        - gdk-pixbuf-pixdata
+      files:
+        exists:
+          # the Windows DLL carries a version suffix (gdk_pixbuf-2.0-0.dll)
+          # which the `lib` matcher doesn't cover, so match it explicitly
+          - if: unix
+            then: lib/libgdk_pixbuf-2.0.*
+            else: Library/bin/gdk_pixbuf-2.0-0.dll
+
+about:
+  homepage: https://developer.gnome.org/gdk-pixbuf/
+  license: LGPL-2.1-or-later
+  license_file: COPYING
+  summary: GdkPixbuf is a library for image loading and manipulation.
+
+extra:
+  recipe-maintainers:
+    - notestaff
+    - pkgw
+    - tschoonj
+    - xhochy
+    - jschueller
