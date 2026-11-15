@@ -6,8 +6,6 @@ channel_sources:
 - conda-forge
 channel_targets:
 - conda-forge main
-gdk_pixbuf:
-- '2'
 glib:
 - '2'
 libjpeg_turbo:
