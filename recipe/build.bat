@@ -1,6 +1,15 @@
 setlocal EnableDelayedExpansion
 @echo on
 
+:: Ensure DLLs from the host and build prefixes can be found at build time.
+:: g-ir-scanner links a temporary exe (in builddir\tmp-introspect*) against
+:: glib/girepository from the prefixes and then runs it to dump introspection
+:: data. Without these dirs on PATH the dump exe dies with
+:: exit status 3221225785 (0xC0000135, STATUS_DLL_NOT_FOUND).
+set "PATH=%LIBRARY_BIN%;%BUILD_PREFIX%\Library\bin;%PATH%"
+:: Also cover the just-built gdk-pixbuf DLL next to the introspection exe.
+set "PATH=%SRC_DIR%\builddir\gdk-pixbuf;%PATH%"
+
 :: set pkg-config path so that host deps can be found
 :: (set as env var so it's used by both meson and during build with g-ir-scanner)
 set "PKG_CONFIG_PATH=%LIBRARY_LIB%\pkgconfig;%LIBRARY_PREFIX%\share\pkgconfig;%BUILD_PREFIX%\Library\lib\pkgconfig"

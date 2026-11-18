@@ -1,5 +1,3 @@
-MACOSX_DEPLOYMENT_TARGET:
-- '11.0'
 MACOSX_SDK_VERSION:
 - '11.0'
 c_compiler:
@@ -14,8 +12,6 @@ channel_sources:
 - conda-forge
 channel_targets:
 - conda-forge main
-gdk_pixbuf:
-- '2'
 glib:
 - '2'
 libjpeg_turbo:
